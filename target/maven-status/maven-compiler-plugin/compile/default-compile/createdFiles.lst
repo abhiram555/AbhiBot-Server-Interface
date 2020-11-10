@@ -1,0 +1,8 @@
+com\abhiram\abhibot\util\Util.class
+com\abhiram\abhibot\module\ModuleDescription.class
+com\abhiram\abhibot\module\ModuleClassLoader.class
+com\abhiram\abhibot\util\AbhiBotException.class
+com\abhiram\abhibot\util\ModuleException.class
+com\abhiram\abhibot\module\Module.class
+com\abhiram\abhibot\Main.class
+com\abhiram\abhibot\module\ModuleManager.class
