@@ -17,6 +17,10 @@
         </repository>
     </distributionManagement>
 
+    <properties>
+        <github.global.server>github</github.global.server>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -56,6 +60,29 @@
                     <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.11</version>
+                <configuration>
+                    <message>Maven artifacts for ${project.version}</message>
+                    <noJekyll>true</noJekyll>
+                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+                    <branch>refs/heads/mvn-repo</branch>
+                    <includes><include>**/*</include></includes>
+                    <repositoryName>AbhiMc-bot</repositoryName>
+                    <repositoryOwner>abhiram555</repositoryOwner>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>deploy</phase>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -79,6 +106,13 @@
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>1.27</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
         </dependency>
 
     </dependencies>

@@ -1,7 +1,13 @@
-com\abhiram\abhibot\util\Util.class
-com\abhiram\abhibot\module\ModuleDescription.class
+com\abhiram\abhibot\defaultlistener\PacketListener.class
+com\abhiram\abhibot\api\BotBuilder.class
 com\abhiram\abhibot\module\ModuleClassLoader.class
 com\abhiram\abhibot\util\AbhiBotException.class
+com\abhiram\abhibot\command\Command.class
+com\abhiram\abhibot\util\Util.class
+com\abhiram\abhibot\command\CommandHandler.class
+com\abhiram\abhibot\module\ModuleDescription.class
+com\abhiram\abhibot\api\BotManager.class
+com\abhiram\abhibot\task\ReconnectTask.class
 com\abhiram\abhibot\util\ModuleException.class
 com\abhiram\abhibot\module\Module.class
 com\abhiram\abhibot\Main.class

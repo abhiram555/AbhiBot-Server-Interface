@@ -39,6 +39,30 @@
           <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>com.github.github</groupId>
+        <artifactId>site-maven-plugin</artifactId>
+        <version>0.11</version>
+        <executions>
+          <execution>
+            <phase>deploy</phase>
+            <goals>
+              <goal>site</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <message>Maven artifacts for ${project.version}</message>
+          <noJekyll>true</noJekyll>
+          <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+          <branch>refs/heads/mvn-repo</branch>
+          <includes>
+            <include>**/*</include>
+          </includes>
+          <repositoryName>AbhiMc-bot</repositoryName>
+          <repositoryOwner>abhiram555</repositoryOwner>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <repositories>
@@ -54,4 +78,7 @@
       <url>file://${project.build.directory}/mvn-repo</url>
     </repository>
   </distributionManagement>
+  <properties>
+    <github.global.server>github</github.global.server>
+  </properties>
 </project>

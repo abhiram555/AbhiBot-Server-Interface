@@ -40,8 +40,4 @@ public class ModuleClassLoader extends URLClassLoader {
         return result;
     }
 
-
-    Set<String> getClasses() {
-        return classes.keySet();
-    }
 }

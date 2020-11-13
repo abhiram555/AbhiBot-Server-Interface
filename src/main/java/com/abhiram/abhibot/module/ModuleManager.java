@@ -1,6 +1,7 @@
 package com.abhiram.abhibot.module;
 
 
+import com.abhiram.abhibot.Main;
 import com.abhiram.abhibot.util.ModuleException;
 import com.abhiram.abhibot.util.Util;
 
@@ -27,7 +28,7 @@ public class ModuleManager {
     }
 
     private void loadModules() throws Exception {
-        System.out.println("Loading Modules....");
+        Main.getLogger().info("Loading Modules");
         File module_folder = new File("modules");
 
         if (!module_folder.exists()) {
@@ -46,13 +47,14 @@ public class ModuleManager {
                 Class javaClass = classLoader.loadClass(className);
 
                 try {
-                    Class<? extends Module> pluginClass = javaClass.asSubclass(Module.class);
+                    Class<? extends Module> moduleclass = javaClass.asSubclass(Module.class);
 
-                    module = pluginClass.newInstance();
+                    module = moduleclass.newInstance();
                     module.onEnable();
 
                     registry_map.put(description.getName(),module);
                 } catch (ClassCastException e) {
+                    e.printStackTrace();
                     throw new ModuleException("main class `" + description.getMain() + "' does not extend Module");
                 } catch (InstantiationException | IllegalAccessException e) {
                     e.printStackTrace();
@@ -69,7 +71,7 @@ public class ModuleManager {
         try (JarFile jar = new JarFile(file)) {
             JarEntry entry = jar.getJarEntry("module.yml");
             if (entry == null) {
-                return null;
+                throw new ModuleException("module.yml not found in " + file.getName() + " Unable to load that.");
             }
             try (InputStream stream = jar.getInputStream(entry))
             {
@@ -81,6 +83,10 @@ public class ModuleManager {
         }
     }
 
+    public HashMap<String,Module> getRegistryMap()
+    {
+        return registry_map;
+    }
 
     Class<?> getClassByName(final String name) {
         Class<?> cachedClass = classes.get(name);
